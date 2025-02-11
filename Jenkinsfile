@@ -6,12 +6,17 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/krsharathrao/jenkins-demo.git'
             }
         }
-        stage ('remove apache') {
+        stage ('install apache') {
             steps {
-                sh 'sudo apt remove -y apache2'
+                sh '''sudo apt install -y apache2 
+                sudo service apache2 start'''
             }
         }
-        
+        stage ('deploy app') {
+            steps {
+                sh 'sudo cp -R * /var/www/html/'
+            }
+        }
     }
     
 }
