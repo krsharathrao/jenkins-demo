@@ -1,20 +1,20 @@
 pipeline {
   agent any
   stages {
-    stage {
-      step ('Fetch code') {
+    stage ('Fetch code') {
+      steps {
         git branch: 'main', url: 'https://github.com/krsharathrao/jenkins-demo.git'
       }
     }
-    stage {
-      step ('Install & start apache') {
+    stage ('Install & start apache') {
+      steps {
         sh '''sudo apt install -y apache2
               sudo service start apache2'''
       }
     }
-    stage {
-      step ('config apache') {
-        step 'sudo cp -R * /var/www/html/'
+    stage ('config apache') {
+      steps {
+        sh 'sudo cp -R * /var/www/html/'
       }
     }
   }
